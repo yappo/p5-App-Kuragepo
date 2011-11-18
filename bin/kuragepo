@@ -117,6 +117,7 @@ AnySan->register_listener(
                     $worker => encode_json(+{
                         from_nickname => $receive->from_nickname,
                         message       => $receive->message,
+                        channel       => $receive->attribute('channel'),
                     }),
                     on_complete => sub {
                         my $res = $_[1];
