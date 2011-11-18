@@ -121,7 +121,10 @@ AnySan->register_listener(
                     on_complete => sub {
                         my $res = $_[1];
                         return unless $res;
-                        $receive->send_reply($res);
+                        for my $line (split /\n/, $res) {
+                            next unless $line;
+                            $receive->send_reply($line);
+                        }
                     },
                     on_fail => sub {
                         # job failed
